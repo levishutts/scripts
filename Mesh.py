@@ -31,15 +31,29 @@ class Mesh():
     def simpleBend(self):
         self.deleteKeys()
         for i in range(441):
-            cmds.setKeyframe('bend' + str(i + 1), at='curvature', time=0, v=0)
-            cmds.setKeyframe('bend' + str(i + 1), at='curvature', time=100, v=60)
-            cmds.setKeyframe('bend' + str(i + 1), at='curvature', time=200, v=0)
+            name = 'bend' + str(i + 1)
+            cmds.setKeyframe(name, at='curvature', time=0, v=0)
+            cmds.setKeyframe(name, at='curvature', time=100, v=60)
+            cmds.setKeyframe(name, at='curvature', time=200, v=0)
+
+    def sineWave(self):
+        self.deleteKeys()
+        for row in range(21):
+            for col in range(21):
+                name = 'bend' + str((21 * col) + (row + 1))
+                v1t2 = (math.sin(row) + 1) * 30
+                t2 = 100 * ((60 - v1t2) / 60)
+                cmds.setKeyframe(name, at='curvature', time=0, v=v1t2)
+                cmds.setKeyframe(name, at='curvature', time=t2, v=60)
+                cmds.setKeyframe(name, at='curvature', time=(t2 + 100), v=0)
+                cmds.setKeyframe(name, at='curvature', time=200, v=v1t2)
+                cmds.keyTangent(name, itt='linear', ott='linear', t=(0, 200))
 
     def simpleWave(self):
         self.deleteKeys()
         for row in range(21):
             for col in range(21):
-                cmds.setKeyframe('bend' + str((21 * col) + (row + 1)), at='curvature', time=0,
-                                 v=((math.sin(row * .25 * math.pi) + 1) * 30))
-                cmds.setKeyframe('bend' + str((21 * col) + (row + 1)), at='curvature', time=0,
-                                 v=((math.sin(row) + 1) * 30))
+                name = 'bend' + str((21 * col) + (row + 1))
+                cmds.setKeyframe(name, at='curvature', time=0, v=0)
+                cmds.setKeyframe(name, at='curvature', time=(row * 5), v=60)
+                cmds.setKeyframe(name, at='curvature', time=(row * 5) + 100, v=0)
