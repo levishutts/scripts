@@ -55,5 +55,8 @@ class Mesh():
             for col in range(21):
                 name = 'bend' + str((21 * col) + (row + 1))
                 cmds.setKeyframe(name, at='curvature', time=0, v=0)
-                cmds.setKeyframe(name, at='curvature', time=(row * 5), v=60)
-                cmds.setKeyframe(name, at='curvature', time=(row * 5) + 100, v=0)
+                cmds.setKeyframe(name, at='curvature', time=(row * 2), v=60)
+                cmds.setKeyframe(name, at='curvature', time=(row * 2) + 40, v=0)
+                cmds.setKeyframe(name, at='curvature', time=(row * 2) + 80, v=60)
+                cmds.setKeyframe(name, at='curvature', time=(row * 2) + 120, v=0)
+                cmds.setKeyframe(name, at='curvature', time=(row * 2) + 160, v=60)
