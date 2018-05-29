@@ -19,20 +19,27 @@ class DemoUI(object):
 
         cmds.button(
             'Simple bend',
-            backgroundColor = DEFAULT_GRAY,
-            command = lambda *args: self._simpleBend()
+            backgroundColor=DEFAULT_GRAY,
+            command=lambda *args: self._simpleBend()
         )
 
         cmds.button(
+            'Uniform wave',
+            backgroundColor=DEFAULT_GRAY,
+            command=lambda *args: self._uniformWave()
+        )
+
+
+        cmds.button(
             'Sine wave',
-            backgroundColor = DARK_GRAY,
-            command = lambda *args: self._sineWave()
+            backgroundColor=MID_GRAY,
+            command=lambda *args: self._sineWave()
         )
 
         cmds.button(
             'Simple wave',
-            backgroundColor = DARK_GRAY,
-            command = lambda *args: self._simpleWave()
+            backgroundColor=DARK_GRAY,
+            command=lambda *args: self._simpleWave()
         )
 
         cmds.showWindow(self.window)
@@ -49,6 +56,9 @@ class DemoUI(object):
 
     def _simpleBend(self):
         self._mesh.simpleBend()
+
+    def _uniformWave(self):
+        self._mesh.uniformWave()
 
     def _sineWave(self):
         self._mesh.sineWave()

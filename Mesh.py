@@ -36,6 +36,14 @@ class Mesh():
             cmds.setKeyframe(name, at='curvature', time=100, v=60)
             cmds.setKeyframe(name, at='curvature', time=200, v=0)
 
+    def uniformWave(self):
+        self.deleteKeys()
+        for i in range(441):
+            name = 'bend' + str(i + 1)
+            cmds.setKeyframe(name, at='curvature', time=0, v=-60)
+            cmds.setKeyframe(name, at='curvature', time=100, v=60)
+            cmds.setKeyframe(name, at='curvature', time=200, v=-60)
+
     def sineWave(self):
         self.deleteKeys()
         for row in range(21):
