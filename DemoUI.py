@@ -3,14 +3,15 @@ import maya.cmds as cmds
 import Mesh as mm
 from config import *
 
+
 class DemoUI(object):
     def __init__(self):
         self._mesh = mm.Mesh()
 
-        self.window = cmds.window(title ="SliderWindow")
-        
+        self.window = cmds.window(title="SliderWindow")
+
         self.column = cmds.columnLayout()
-        
+
         cmds.button(
             'Create Nails',
             backgroundColor=LIGHT_GRAY,
@@ -29,7 +30,6 @@ class DemoUI(object):
             command=lambda *args: self._uniformWave()
         )
 
-
         cmds.button(
             'Sine wave',
             backgroundColor=MID_GRAY,
@@ -40,6 +40,11 @@ class DemoUI(object):
             'Simple wave',
             backgroundColor=DARK_GRAY,
             command=lambda *args: self._simpleWave()
+        )
+        cmds.button(
+            'Apply material',
+            backgroundColor=DARK_GREEN,
+            command=lambda *args: self._assignPewter()
         )
 
         cmds.showWindow(self.window)
@@ -65,3 +70,6 @@ class DemoUI(object):
 
     def _simpleWave(self):
         self._mesh.simpleWave()
+
+    def _assignPewter(self):
+        self._mesh.assignPewter()

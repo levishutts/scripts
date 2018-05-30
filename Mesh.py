@@ -1,7 +1,8 @@
- # Mesh.py
+# Mesh.py
 import maya.cmds as cmds
 import math
 from config import *
+
 
 class Mesh():
     def createNails(self):
@@ -26,7 +27,7 @@ class Mesh():
 
     def deleteKeys(self):
         for i in range(441):
-            cmds.cutKey('bend' + str(i + 1), time=(0,200), at='curvature', option="keys")
+            cmds.cutKey('bend' + str(i + 1), time=(0, 200), at='curvature', option="keys")
 
     def simpleBend(self):
         self.deleteKeys()
@@ -68,3 +69,17 @@ class Mesh():
                 cmds.setKeyframe(name, at='curvature', time=(row * 2) + 80, v=60)
                 cmds.setKeyframe(name, at='curvature', time=(row * 2) + 120, v=0)
                 cmds.setKeyframe(name, at='curvature', time=(row * 2) + 160, v=60)
+
+    def assignPewter(self):
+        shadingNode = cmds.shadingNode('blinn', asShader=True, name='blinnNew')
+        # find good values for the color:
+        cmds.setAttr(
+            shadingNode + '.color', 0.2, 0.2, 0.2, type="double3")
+        # find good values for the specular color:
+        cmds.setAttr(
+            shadingNode + '.specularColor', 100.0, 100.0, 100.0, type="double3")
+        for i in range(441):
+            name = 'nail' + str(i)
+            cmds.select(name)
+            cmds.hyperShade(assign=shadingNode)
+            cmds.select(clear=True)
